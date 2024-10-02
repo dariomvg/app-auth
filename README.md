@@ -62,4 +62,4 @@ SELECT * FROM users_auth
 ```js
     npm run dev
 ```
-### visitar: http://localhost:5173
+### visitar: http://localhost:3000
