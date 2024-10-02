@@ -1,0 +1,56 @@
+.title-docs {
+  background-color: #343a40;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+}
+nav {
+  background-color: #495057;
+  padding: 10px;
+}
+nav a {
+  color: white;
+  margin-right: 15px;
+  text-decoration: none;
+}
+nav a:hover {
+  text-decoration: underline;
+}
+.container {
+  display: flex;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 15px;
+}
+.sidebar {
+  flex: 1;
+  background-color: #e9ecef;
+  padding: 15px;
+  margin-right: 20px;
+}
+.content {
+  flex: 3;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+h1,
+h2,
+h3 {
+  color: #343a40;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+ul li {
+  margin-bottom: 10px;
+}
+ul li a {
+  color: #007bff;
+  text-decoration: none;
+}
+ul li a:hover {
+  text-decoration: underline;
+}

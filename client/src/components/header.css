@@ -1,0 +1,67 @@
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 14px;
+    padding: 10px;
+    position: fixed;
+    z-index: 999;
+    background-color: #111111;
+}
+
+.link-header {
+    text-decoration: none;
+    font-size: 18px; 
+    color: #989898;
+    transition: .5s;
+
+
+}
+
+.link-header:hover {
+    color: #fff; 
+    transition: .5s;
+
+}
+
+.btn-logout {
+    border: 1px solid #fff; 
+    background-color: transparent;
+    cursor:pointer;
+    border-radius: 5px; 
+    font-size: 18px; 
+    padding: 5px;
+    color: #fff; 
+    transition: .5s;
+
+}
+
+.btn-logout:hover {
+    background-color: #fff; 
+    color: #000; 
+    transition: .5s;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 6px; 
+}
+
+.title-user {
+    color: #fff; 
+    text-decoration: underline;
+    font-size: 18px;
+}
+
+.line-user {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #37ff00;
+}
+
+
+
+
