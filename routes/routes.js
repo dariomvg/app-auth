@@ -2,40 +2,71 @@ import { Router } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { findUser, insertUser, selectUser } from "../libs/handle_database.js";
+import { secret_word } from "../utils/credentials.db.js";
+import { responses } from "../utils/responses.js";
+
 export const router = Router();
+
+router.get("/check-session", (req, res) => {
+  const token = req.cookies.sessionToken;
+  if (!token) return res.json(responses.noSession);
+
+  jwt.verify(token, secret_word, (err, decoded) => {
+    if (err) return res.json(responses.invalidToken);
+    return res.json({ ...responses.loginSuccess, username: decoded.username });
+  });
+});
 
 router.post("/sign-up", async (req, res) => {
   const { username, pass } = req.body;
   const foundUsername = await findUser(username);
   if (foundUsername) {
-    return res.json({ ok: false, detail: "Nombre de usuario ya registrado" });
+    return res.json(responses.userExists);
   }
   const password = await bcrypt.hash(pass, 10);
-  const data = await insertUser(username, password)
-  
+  const data = await insertUser(username, password);
+
   if (data.username) {
-    return res.json({ ok: true, detail: "Usuario ingresado" });
+    return res.json(responses.userCreated);
   }
 });
 
 router.post("/login", async (req, res) => {
   const { username, pass } = req.body;
-  const foundUser = await selectUser(username); 
+  const foundUser = await selectUser(username);
 
-  if (!foundUser.username) {
-    return res.json({ ok: false, detail: "Usuario no registrado" });
+  if (!foundUser) {
+    return res.json(responses.userNotFound);
   }
   const comparePassword = await bcrypt.compare(pass, foundUser.password);
 
   if (!comparePassword) {
-      return res.json({ ok: false, detail: "Usuario o contraseña incorrecta" });
+    return res.json(responses.invalidPassword);
   } else {
-    jwt.sign({id: foundUser.id}, "abcde12345secret", (err, token) => {
-      if (err) {
-        return res.json({ ok: false, detail: "No se pudo iniciar sesión" });
-      } else {
-        return res.json({ok: true, username: foundUser.username, token});
+    jwt.sign(
+      { id: foundUser.id, username: foundUser.username },
+      secret_word,
+      { expiresIn: "3d" },
+      (err, token) => {
+        if (err) {
+          return res.json(responses.loginFailed);
+        } else {
+          res
+            .cookie("sessionToken", token, {
+              httpOnly: true,
+              secure: false, // 'false' para que funcione en desarrollo o 'true' para produccion con una variable de entorno
+              sameSite: "lax",
+            })
+            .json({
+              ...responses.loginSuccess,
+              username: foundUser.username,
+            });
+        }
       }
-    });
+    );
   }
+});
+
+router.get("/logout", (req, res) => {
+  res.clearCookie("sessionToken").json(responses.sessionClosed);
 });

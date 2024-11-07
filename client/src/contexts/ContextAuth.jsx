@@ -1,5 +1,5 @@
 "use client";
-import { loginUser, signUpUser } from "@/helpers/helper";
+import { checkSession, loginUser, logoutUser, signUpUser } from "@/helpers/helper";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -12,10 +12,9 @@ export const useAuth = () => {
 };
 
 export default function ProviderAuth({ children }) {
-  const [username, setUsername] = useState({});
+  const [username, setUsername] = useState("");
   const [messageLogin, setMessageLogin] = useState("");
   const [messageSign, setMessageSign] = useState("");
-  const [initialized, setInitialized] = useState(false); 
   const router = useRouter();
 
   const login = async (user) => {
@@ -24,7 +23,7 @@ export default function ProviderAuth({ children }) {
       setMessageLogin(data.detail);
       return;
     }
-    setUsername(data);
+    setUsername(data.username);
     router.push("/");
   };
 
@@ -37,30 +36,38 @@ export default function ProviderAuth({ children }) {
     router.push("/login");
   };
 
-  const logOut = () => {
-    setUsername({});
-    router.push("/");
+  const logOut = async () => {
+    const data = await logoutUser();
+    if (data.ok) {
+      setUsername("");
+      router.push("/");
+    }
   };
 
+
   useEffect(() => {
-    const user = localStorage.getItem("username");
-    if (user) {
-      setUsername(JSON.parse(user));
-    };
-    setInitialized(true);
+    const checkUserSession = async () => {
+      const data = await checkSession(); 
+      if(!data.ok){
+        return; 
+      }
+      setUsername(data.username); 
+    }
+    checkUserSession(); 
   }, []);
 
-  if (initialized) {
-    if (username && username.token) {
-      localStorage.setItem("username", JSON.stringify(username));
-    } else {
-      localStorage.removeItem("username");
-    }
-  }
 
   return (
     <ContextAuth.Provider
-      value={{ username, login, signUp, logOut, setMessageSign, messageSign, messageLogin  }}>
+      value={{
+        username,
+        login,
+        signUp,
+        logOut,
+        setMessageSign,
+        messageSign,
+        messageLogin,
+      }}>
       {children}
     </ContextAuth.Provider>
   );

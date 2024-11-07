@@ -13,13 +13,13 @@ export const Header = () => {
       <Link href="/docs" className="link-header">
         Docs
       </Link>
-      {username?.token ? (
+      {username ? (
         <>
           <button onClick={logOut} className="btn-logout">
             Cerrar sesión
           </button>
           <div className="user">
-            <p className="title-user">{username.username}</p>
+            <p className="title-user">{username}</p>
             <div className="line-user"></div>
           </div>
         </>

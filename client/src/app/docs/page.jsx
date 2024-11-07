@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 export default function docs() {
     const {username} = useAuth(); 
     const router = useRouter(); 
-    if(!username.token) {
+    if(!username) {
       router.push("/login"); 
     }
   
