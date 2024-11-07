@@ -1,5 +1,9 @@
 # Aplicación de manejo de login, autenticación, etc.
 
+<img src="https://i.imgur.com/jVPrpUc.png" title="source: imgur.com" />  
+
+<br/>
+
 ### Notas:
 - NO está desplegada en ningún sitio
 - Está creada con PostgreSQL(Base de datos), NextJS(Front-end) y ExpressJS(servidor)
