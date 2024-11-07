@@ -52,7 +52,7 @@ CREATE TABLE users_auth(
 SELECT * FROM users_auth
 ```
 
-### En el archivo credential.js en utils , está la configuración de la base de datos, debes reemplazar con tus datos:
+### En el archivo credentials.js en utils , está la configuración de la base de datos, debes reemplazar con tus propios datos
 
 
 ## 3- Visitar
