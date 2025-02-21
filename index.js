@@ -4,11 +4,12 @@ import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import { PORT } from "../utils/credentials.db.js";
+import { url_client } from "./utils/credentials.db.js";
 const app = express(); 
 
 dotenv.config(); 
 app.use(cors({
-    origin: "http://localhost:3000", 
+    origin: url_client, 
     credentials: true, 
   }))
 app.use(express.json()); 

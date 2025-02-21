@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node app/index.js --ignore client",
-    "dev": "node app/index.js --ignore client",
-    "dev2": "nodemon app/index.js --ignore client"
+    "start": "node index.js --ignore client",
+    "dev": "node index.js --ignore client",
+    "dev2": "nodemon index.js --ignore client"
   },
   "keywords": [],
   "author": "",
