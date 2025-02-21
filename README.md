@@ -1,5 +1,9 @@
 # Aplicación de manejo de login, autenticación, etc.
 
+<img src="https://i.imgur.com/jVPrpUc.png" title="source: imgur.com" />  
+
+<br/>
+
 ### Notas:
 - NO está desplegada en ningún sitio
 - Está creada con PostgreSQL(Base de datos), NextJS(Front-end) y ExpressJS(servidor)
@@ -52,7 +56,7 @@ CREATE TABLE users_auth(
 SELECT * FROM users_auth
 ```
 
-### En el archivo credential.js en utils , está la configuración de la base de datos, debes reemplazar con tus datos:
+### En el archivo credentials.js en utils , está la configuración de la base de datos, debes reemplazar con tus propios datos
 
 
 ## 3- Visitar
