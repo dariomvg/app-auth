@@ -11,14 +11,11 @@ const formBase = {
 
 export default function login() {
   const [form, setForm] = useState(formBase);
-
   const { login, messageLogin } = useAuth();
 
   const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
   };
 
   const submitLogin = (e) => {

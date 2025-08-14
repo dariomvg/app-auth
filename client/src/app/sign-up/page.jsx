@@ -14,9 +14,8 @@ export default function SignUp() {
   const { signUp, setMessageSign, messageSign } = useAuth();
 
   const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
+    const {name, value} = e.target
+    setForm({...form,[name]: value,
     });
   };
 
