@@ -18,6 +18,7 @@ router.get("/check-session", (req, res) => {
 });
 
 router.post("/sign-up", async (req, res) => {
+  console.log("hereee")
   const { username, pass } = req.body;
   const foundUsername = await findUser(username);
   if (foundUsername) {
@@ -54,7 +55,7 @@ router.post("/login", async (req, res) => {
           res
             .cookie("sessionToken", token, {
               httpOnly: true,
-              secure: false, // 'false' para que funcione en desarrollo o 'true' para produccion con una variable de entorno
+              secure: false, // 'false' para que funcione en desarrollo o 'true' para producción con una variable de entorno
               sameSite: "lax",
             })
             .json({
